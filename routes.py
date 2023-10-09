@@ -1,17 +1,10 @@
 from typing import List
 
-from fastapi import FastAPI
+from fastapi.routing import APIRouter
 from pydantic import BaseModel, ConfigDict, Field
 from stringcase import camelcase
 
-import routes
-
-app = FastAPI(
-    title="Air Quality Index",
-    description="Data Product for current air quality index",
-    version="1.0.0",
-)
-app.include_router(routes.router)
+router = APIRouter()
 
 
 class CamelCaseModel(BaseModel):
@@ -63,13 +56,8 @@ class CurrentAirQualityResponse(CamelCaseModel):
     )
 
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
-
-@app.post(
-    "/AirQuality/Current",
+@router.post(
+    "/router/AirQuality/Current",
     response_model=CurrentAirQualityResponse,
 )
 def read_item(data: CurrentAirQualityRequest):
