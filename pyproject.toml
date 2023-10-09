@@ -8,7 +8,9 @@ packages = [{include = "fastapi_pydantic_bug_poc"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-fastapi = {version = "^0.103.2", extras = ["all"]}
+fastapi = "^0.103.2"
+uvicorn = {version = "^0.23.2", extras = ["standard"]}
+pydantic = "^2.4.2"
 
 
 [build-system]
