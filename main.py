@@ -13,7 +13,7 @@ app = FastAPI(
 app.include_router(routes.router)
 
 
-p = Path("models.py")
+p = Path("models.py").absolute()
 spec = importlib.util.spec_from_file_location(name=str(p), location=str(p))
 
 if not spec.loader:
