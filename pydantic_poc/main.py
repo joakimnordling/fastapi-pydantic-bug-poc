@@ -1,8 +1,9 @@
 import importlib.util
-import json
 from pathlib import Path
 
 from fastapi import FastAPI
+
+from pydantic_poc.fastapi_stuff import get_fake_openapi
 
 
 def main():
@@ -26,6 +27,26 @@ def main():
         version="1.0.0",
     )
 
+    def mock_openapi():
+        data = get_fake_openapi(
+            title=app.title,
+            version=app.version,
+            openapi_version=app.openapi_version,
+            summary=app.summary,
+            description=app.description,
+            terms_of_service=app.terms_of_service,
+            contact=app.contact,
+            license_info=app.license_info,
+            routes=app.routes,
+            webhooks=app.webhooks.routes,
+            tags=app.openapi_tags,
+            servers=app.servers,
+            separate_input_output_schemas=app.separate_input_output_schemas,
+        )
+        return data
+
+    app.openapi = mock_openapi
+
     @app.post(
         "/AirQuality/Current",
         response_model=CurrentAirQualityResponse,
@@ -37,8 +58,8 @@ def main():
             attribution=["XYZ environmental monitoring"],
         )
 
-    openapi = app.openapi()
-    print(json.dumps(openapi, indent=2))
+    app.openapi()
+    # print(json.dumps(openapi, indent=2))
 
 
 if __name__ == "__main__":
