@@ -459,16 +459,6 @@ typing-extensions = {version = ">=3.10.0", markers = "python_version < \"3.10\""
 full = ["httpx (>=0.22.0)", "itsdangerous", "jinja2", "python-multipart", "pyyaml"]
 
 [[package]]
-name = "stringcase"
-version = "1.2.0"
-description = "String case converter."
-optional = false
-python-versions = "*"
-files = [
-    {file = "stringcase-1.2.0.tar.gz", hash = "sha256:48a06980661908efe8d9d34eab2b6c13aefa2163b3ced26972902e3bdfd87008"},
-]
-
-[[package]]
 name = "tomli"
 version = "2.0.1"
 description = "A lil' TOML parser"
@@ -676,4 +666,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "1af4033545226105fc29afba053d6835b4df195260b1a4301a0c110dcb6e2240"
+content-hash = "8f7e3d7b5de44e08e6e49668e4dc4188e80e103f91160a7804d100bf202f1754"

@@ -1,11 +1,11 @@
 from typing import List
 
 from pydantic import BaseModel, ConfigDict, Field
-from stringcase import camelcase
+from pydantic.alias_generators import to_camel
 
 
 class CamelCaseModel(BaseModel):
-    model_config = ConfigDict(alias_generator=camelcase, populate_by_name=True)
+    model_config = ConfigDict(alias_generator=to_camel, populate_by_name=True)
 
 
 class CurrentAirQualityRequest(CamelCaseModel):

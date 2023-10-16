@@ -6,7 +6,8 @@ from fastapi import FastAPI
 
 
 def main():
-    p = (Path("pydantic_poc") / "models.py").absolute()
+    poc_dir = Path(__file__).parent.relative_to(Path.cwd())
+    p = (poc_dir / "models.py").absolute()
     spec = importlib.util.spec_from_file_location(name=str(p), location=str(p))
 
     if not spec.loader:
@@ -36,7 +37,8 @@ def main():
             attribution=["XYZ environmental monitoring"],
         )
 
-    print(json.dumps(app.openapi(), indent=2))
+    openapi = app.openapi()
+    print(json.dumps(openapi, indent=2))
 
 
 if __name__ == "__main__":
