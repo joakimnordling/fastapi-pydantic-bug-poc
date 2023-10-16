@@ -4,7 +4,10 @@ version = "0.1.0"
 description = ""
 authors = ["Your Name <you@example.com>"]
 readme = "README.md"
-packages = [{include = "fastapi_pydantic_bug_poc"}]
+packages = [{include = "pydantic_poc"}]
+
+[tool.poetry.scripts]
+run-poc = "pydantic_poc.main:main"
 
 [tool.poetry.dependencies]
 python = "^3.9"
