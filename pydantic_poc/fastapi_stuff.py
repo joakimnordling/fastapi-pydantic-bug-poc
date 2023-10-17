@@ -83,6 +83,9 @@ def get_fake_openapi(
     if servers:
         output["servers"] = servers
     all_fields = get_fields_from_routes(list(routes or []) + list(webhooks or []))
+    print("---all_fields---")
+    print(all_fields)
+    print("---/all_fields---")
     model_name_map = get_compat_model_name_map(all_fields)
     schema_generator = GenerateJsonSchema(ref_template=REF_TEMPLATE)
     patched_get_definitions(
