@@ -28,7 +28,7 @@ jobs:
         run: poetry install
 
       - name: Show version info
-        run: python -c "import pydantic.version; print(pydantic.version.version_info())"
+        run: poetry run python -c "import pydantic.version; print(pydantic.version.version_info())"
 
       - name: Run tests
         run: poetry run run-poc
