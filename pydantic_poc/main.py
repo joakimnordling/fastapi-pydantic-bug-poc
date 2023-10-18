@@ -6,6 +6,9 @@ from pydantic.json_schema import models_json_schema
 
 
 def import_my_model():
+    """
+    Import a Pydantic model using importlib from an absolute filesystem path.
+    """
     poc_dir = Path(__file__).parent.relative_to(Path.cwd())
     p = (poc_dir / "models.py").absolute()
     spec = importlib.util.spec_from_file_location(name=str(p), location=str(p))

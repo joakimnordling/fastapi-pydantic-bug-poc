@@ -11,12 +11,9 @@ run-poc = "pydantic_poc.main:main"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-fastapi = "^0.103.2"
-uvicorn = {version = "^0.23.2", extras = ["standard"]}
 pydantic = "^2.4.2"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^7.4.2"
 
 [tool.skjold]
 report_only = false
