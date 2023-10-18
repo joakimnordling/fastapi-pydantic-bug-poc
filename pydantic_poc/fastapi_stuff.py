@@ -1,24 +1,39 @@
 import json
-from typing import Any, Dict, List, Optional, Sequence, Union
+from typing import Any, Dict, List, Literal, Optional, Sequence, Tuple, Union
 
 from fastapi import routing
-from fastapi._compat import (
-    GenerateJsonSchema,
-    ModelField,
-    get_compat_model_name_map,
-    get_definitions,
-)
+from fastapi._compat import GenerateJsonSchema, ModelField, get_compat_model_name_map
 from fastapi.dependencies.utils import get_flat_params
 from fastapi.openapi.constants import REF_TEMPLATE
+from fastapi.types import ModelNameMap
+from pydantic.json_schema import JsonSchemaValue
 from starlette.routing import BaseRoute
 
 
-def patched_get_definitions(*args, **kwargs):
-    field_mapping, definitions = get_definitions(*args, **kwargs)
+def patched_get_definitions(
+    *,
+    fields: List[ModelField],
+    schema_generator: GenerateJsonSchema,
+    model_name_map: ModelNameMap,
+    separate_input_output_schemas: bool = True,
+) -> Tuple[
+    Dict[Tuple[ModelField, Literal["validation", "serialization"]], JsonSchemaValue],
+    Dict[str, Dict[str, Any]],
+]:
+    override_mode: Union[Literal["validation"], None] = (
+        None if separate_input_output_schemas else "validation"
+    )
+    inputs = [
+        (field, override_mode or field.mode, field._type_adapter.core_schema)
+        for field in fields
+    ]
+    field_mapping, definitions = schema_generator.generate_definitions(inputs=inputs)
+
     print("---")
     print(json.dumps(definitions, indent=2))
     print("---")
-    return field_mapping, definitions
+
+    return field_mapping, definitions  # type: ignore[return-value]
 
 
 def get_fields_from_routes(
