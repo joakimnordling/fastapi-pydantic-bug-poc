@@ -11,7 +11,7 @@ run-poc = "pydantic_poc.main:main"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-pydantic = "^2.4.2"
+pydantic = {git = "https://github.com/joakimnordling/pydantic.git", rev = "test-possible-fix"}
 
 [tool.poetry.group.dev.dependencies]
 
