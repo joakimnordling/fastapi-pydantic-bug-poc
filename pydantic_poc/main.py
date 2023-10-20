@@ -11,7 +11,7 @@ def import_my_model():
     """
     poc_dir = Path(__file__).parent.relative_to(Path.cwd())
     p = (poc_dir / "models.py").absolute()
-    spec = importlib.util.spec_from_file_location(name=str(p), location=str(p))
+    spec = importlib.util.spec_from_file_location(name="my_module", location=str(p))
 
     if not spec.loader:
         raise RuntimeError(f"Failed to import {p} module")
